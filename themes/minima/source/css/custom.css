@@ -3151,74 +3151,143 @@ html.darkmode .icon-moon { display: block; }
 }
 
 /* ======================================== */
-/* Hero Card with Hamburger Menu            */
+/* Hero Card with Clean Hamburger Menu      */
 /* ======================================== */
 
 .hero-card {
   position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 2rem;
+  gap: 2.2rem;
   align-items: center;
-  margin-bottom: 3rem;
-  padding: 2rem;
+  margin-top: 0 !important;
+  margin-bottom: 2.5rem;
+  padding: 2.2rem 2.4rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: linear-gradient(135deg, var(--surface-strong), var(--surface));
   box-shadow: var(--card-shadow);
-  overflow: hidden;
+  overflow: visible !important;
 }
 
-.hero-card::before {
-  content: '';
-  position: absolute;
-  inset: auto -8rem -8rem auto;
-  width: 18rem;
-  height: 18rem;
-  border-radius: 50%;
-  background: var(--accent-soft);
-  filter: blur(8px);
-}
-
-.hamburger-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10;
+.hero-avatar-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--surface);
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-.hamburger-btn:hover {
-  background: var(--accent-soft);
-  color: var(--accent-strong);
-  transform: scale(1.05);
+.hero-avatar-wrap img.about {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 3px solid var(--surface-strong);
+  margin-bottom: 0 !important;
 }
+
+.home-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-hero-copy .eyebrow {
+  margin: 0 0 0.4rem 0 !important;
+  font-size: 1.15rem !important;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--accent-strong);
+  text-transform: uppercase;
+}
+
+.home-hero-copy h2 {
+  margin: 0 0 0.6rem 0 !important;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: inherit;
+  line-height: 1.2;
+}
+
+.home-hero-copy p {
+  margin: 0 0 0.4rem 0 !important;
+  font-size: 1.45rem !important;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ======================================== */
+/* Hamburger Button (No Box, Pure Icon)     */
+/* ======================================== */
+
+.hamburger-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: var(--text-muted) !important;
+  cursor: pointer !important;
+  border-radius: 8px !important;
+  transition: color 0.18s ease, transform 0.18s ease, background-color 0.18s ease !important;
+}
+
+.hamburger-btn:hover,
+.hamburger-btn:focus-visible {
+  color: var(--accent-strong) !important;
+  background: var(--accent-soft) !important;
+  transform: scale(1.08) !important;
+}
+
+.hero-card .hamburger-btn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 50;
+}
+
+/* ======================================== */
+/* Downward Dropdown Menu                   */
+/* ======================================== */
 
 .hero-menu {
   position: absolute;
-  top: 3.5rem;
-  right: 1rem;
-  z-index: 20;
+  top: 3.8rem;
+  right: 1.2rem;
+  z-index: 200;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.3rem;
+  min-width: 150px;
   padding: 0.5rem;
   border: 1px solid var(--border);
   border-radius: 14px;
   background: var(--surface-strong);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  transform-origin: top right;
+  animation: heroMenuDropdown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes heroMenuDropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero-menu[hidden] {
+  display: none !important;
 }
 
 html.darkmode .hero-menu {
@@ -3228,10 +3297,10 @@ html.darkmode .hero-menu {
 .hero-menu-link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1rem;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem;
   border-radius: 10px;
-  font-size: 0.95rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: var(--text-muted);
   text-decoration: none;
@@ -3248,30 +3317,23 @@ html.darkmode .hero-menu {
   background: var(--accent-soft);
 }
 
-.theme-toggle-btn .icon-sun { display: inline; }
-.theme-toggle-btn .icon-moon { display: none; }
-html.darkmode .theme-toggle-btn .icon-sun { display: none; }
-html.darkmode .theme-toggle-btn .icon-moon { display: inline; }
-
-@media (max-width: 768px) {
-  .hero-card {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .hero-avatar-wrap {
-    display: flex;
-    justify-content: center;
-  }
-  .home-hero-copy p {
-    font-size: 1.3rem;
-  }
+/* Ensure no pseudo-element adds duplicate icons or hides span */
+.hero-menu .theme-toggle-btn::before {
+  content: none !important;
+  display: none !important;
 }
 
+.hero-menu .theme-toggle-btn span {
+  display: inline-block !important;
+}
+
+.theme-toggle-btn .icon-sun { display: inline-block; vertical-align: middle; }
+.theme-toggle-btn .icon-moon { display: none; vertical-align: middle; }
+html.darkmode .theme-toggle-btn .icon-sun { display: none; }
+html.darkmode .theme-toggle-btn .icon-moon { display: inline-block; }
+
 /* ======================================== */
-/* Topbar (Global Hamburger Nav)            */
+/* Topbar (Subpage Navigation)              */
 /* ======================================== */
 
 .topbar {
@@ -3282,7 +3344,8 @@ html.darkmode .theme-toggle-btn .icon-moon { display: inline; }
   align-items: center;
   justify-content: space-between;
   height: 56px;
-  padding: 0 1.5rem;
+  padding: 0 0.5rem;
+  margin-bottom: 2rem;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
@@ -3297,7 +3360,7 @@ html.darkmode .topbar {
 .topbar-brand {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
   text-decoration: none;
   color: inherit;
 }
@@ -3310,124 +3373,327 @@ html.darkmode .topbar {
 }
 
 .topbar-title {
-  font-size: 1.15rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--accent-strong);
   letter-spacing: -0.02em;
 }
 
-.hamburger-btn {
+.topbar-nav-wrap {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: transparent;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-.hamburger-btn:hover {
-  background: var(--accent-soft);
-  color: var(--accent-strong);
-  transform: scale(1.05);
+.topbar-nav-wrap .hero-menu {
+  top: calc(100% + 8px);
+  right: 0;
 }
 
-.hero-menu {
-  position: absolute;
-  top: 50px;
-  right: 1.5rem;
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  min-width: 160px;
-  padding: 0.5rem;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: var(--surface-strong);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
+/* ======================================== */
+/* Recent Posts: Centered, Aligned, Larger  */
+/* ======================================== */
+
+.home-section {
+  margin-top: 2rem;
 }
 
-html.darkmode .hero-menu {
-  background: rgba(34, 34, 38, 0.95);
-}
-
-.hero-menu-link {
+.section-heading-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1rem;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  font-weight: 500;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.section-heading-row h3 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: inherit;
+}
+
+.section-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.4rem;
   color: var(--text-muted);
   text-decoration: none;
-  transition: all 0.15s ease;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
+  transition: color 0.15s ease, transform 0.15s ease;
 }
 
-.hero-menu-link:hover {
+.section-more:hover {
   color: var(--accent-strong);
-  background: var(--accent-soft);
+  transform: translateX(2px);
 }
 
-.theme-toggle-btn .icon-sun { display: inline; }
-.theme-toggle-btn .icon-moon { display: none; }
-html.darkmode .theme-toggle-btn .icon-sun { display: none; }
-html.darkmode .theme-toggle-btn .icon-moon { display: inline; }
-
-@media (max-width: 768px) {
-  .topbar { padding: 0 1rem; height: 50px; }
-  .topbar-title { font-size: 1rem; }
-  .topbar-logo { width: 24px; height: 24px; }
-  .hamburger-btn { width: 36px; height: 36px; }
-  .hero-menu { right: 1rem; top: 44px; }
-}
-
-/* ======================================== */
-/* FIX: hidden attribute must override flex */
-/* ======================================== */
-.hero-menu[hidden] {
-  display: none !important;
-}
-
-/* ======================================== */
-/* Hero Card: 置顶 + 一页显示              */
-/* ======================================== */
-.hero-card {
-  margin-top: 0 !important;
-}
-
-/* 移除 body 顶部的多余边距，让卡片紧贴顶部 */
-body {
-  margin-top: 0 !important;
-  padding-top: 0.5rem !important;
-}
-
-/* 压缩最近文章列表间距，尽量一页显示 */
-.home-section {
-  margin-top: 1.5rem;
+.home-post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
 .home-post-row {
-  padding: 0.7rem 1rem !important;
-  margin-bottom: 0.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 2.2rem !important;
+  padding: 1.15rem 1.6rem !important;
+  margin: 0 !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  background: var(--surface) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03) !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  min-height: 52px;
 }
 
-.home-post-row .lit {
-  font-size: 1rem !important;
+.home-post-row:hover {
+  background: var(--surface-strong) !important;
+  border-color: var(--accent) !important;
+  box-shadow: var(--hover-shadow) !important;
+  transform: translateY(-2px) !important;
+}
+
+.home-post-date {
+  flex: 0 0 130px !important;
+  min-width: 130px !important;
+  display: flex !important;
+  align-items: center !important;
+  font-size: 1.45rem !important;
+  color: var(--text-muted) !important;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap;
+}
+
+.home-post-date time {
+  display: inline-block;
+  line-height: inherit;
+}
+
+.home-post-title {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .home-post-title a {
-  font-size: 1.1rem !important;
+  display: inline-block !important;
+  font-size: 1.6rem !important;
+  font-weight: 600 !important;
+  color: inherit !important;
+  line-height: 1.4 !important;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.home-post-title a:hover {
+  color: var(--accent-strong) !important;
+}
+
+/* ======================================== */
+/* Tag Page Shell                           */
+/* ======================================== */
+
+.tag-shell {
+  margin-top: 1.5rem;
+}
+
+.tag-page-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.tag-page-title {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent-strong);
+}
+
+.tag-page-count {
+  font-size: 1.4rem;
+  color: var(--text-muted);
+}
+
+.tag-shell .archive-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2.2rem !important;
+  padding: 1.15rem 1.6rem !important;
+  margin-bottom: 0.8rem !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  background: var(--surface) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03) !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  min-height: 52px;
+}
+
+.tag-shell .archive-item:hover {
+  background: var(--surface-strong) !important;
+  border-color: var(--accent) !important;
+  box-shadow: var(--hover-shadow) !important;
+  transform: translateY(-2px) !important;
+}
+
+.tag-shell .archive-item-date {
+  flex: 0 0 130px !important;
+  min-width: 130px !important;
+  display: flex !important;
+  align-items: center !important;
+  font-size: 1.45rem !important;
+  color: var(--text-muted) !important;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap;
+}
+
+.tag-shell .archive-item-main {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.tag-shell .archive-item-title-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.tag-shell .archive-item-title-row a {
+  display: inline-block !important;
+  font-size: 1.6rem !important;
+  font-weight: 600 !important;
+  color: inherit !important;
+  line-height: 1.4 !important;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.tag-shell .archive-item-title-row a:hover {
+  color: var(--accent-strong) !important;
+}
+
+/* ======================================== */
+/* Footer: Left Copyright, Right Icons      */
+/* ======================================== */
+
+.site-footer {
+  margin-top: 3.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.footer-divider {
+  margin: 3.5rem 0 1.5rem !important;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.site-footer-inner {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0 0.5rem;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+}
+
+.footer-copyright,
+#madewith {
+  margin: 0 !important;
+  font-size: 1.4rem !important;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-align: left !important;
+}
+
+.footer-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1.4rem;
+}
+
+.footer-link.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: color 0.18s ease, transform 0.18s ease;
+  line-height: 1;
+}
+
+.footer-link.icon:hover {
+  color: var(--accent-strong);
+  transform: translateY(-2px);
+}
+
+/* ======================================== */
+/* Responsive Adjustments                   */
+/* ======================================== */
+
+@media (max-width: 768px) {
+  .hero-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+    padding: 1.8rem 1.5rem;
+  }
+  .hero-avatar-wrap {
+    justify-content: center;
+  }
+  .home-hero-copy {
+    align-items: center;
+  }
+  .topbar {
+    padding: 0 0.5rem;
+    height: 50px;
+  }
+  .topbar-title {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-post-row,
+  .tag-shell .archive-item {
+    gap: 1.2rem !important;
+    padding: 0.9rem 1.2rem !important;
+  }
+  .home-post-date,
+  .tag-shell .archive-item-date {
+    flex: 0 0 95px !important;
+    min-width: 95px !important;
+    font-size: 1.3rem !important;
+  }
+  .home-post-title a,
+  .tag-shell .archive-item-title-row a {
+    font-size: 1.45rem !important;
+  }
+  .site-footer-inner {
+    flex-direction: row;
+  }
 }

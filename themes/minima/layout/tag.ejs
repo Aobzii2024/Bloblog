@@ -6,29 +6,27 @@
         if (page.year) title = page.year + (page.month ? '/' + page.month : '');
         else title = '归档';
     }
+    const count = page.posts ? page.posts.length : 0;
 %>
-<% if(title) { %>
-   <h3>相关文章：<%- title %></h3>
-<% } %>
-<% page.posts.each(function(item){ %>
 
-  <article>
-    <div class="row">
+<div class="archive-shell tag-shell">
+  <div class="tag-page-header">
+    <h2 class="tag-page-title"># <%- title || '标签' %></h2>
+    <span class="tag-page-count"><%= count %> 篇文章</span>
+  </div>
 
-      <div class="three columns left lit">
-        <p class="bottom"><%- full_date(item.date, 'll') %></p>
-      </div>
-      <div class="nine columns left mb-3">
-        <a href="<%- url_for(item.path) %>" class="interactive-link">
-          <% if (item.title === '') { %>
-            未命名
-          <% } else { %>
-            <%- item.title %>
-          <% } %>
-        </a>
-      </div>
-    </div>
-  </article>
+  <div class="archive-group">
+    <% page.posts.sort('date', 'desc').each(function(item){ %>
+      <article class="archive-item">
+        <div class="archive-item-date"><%- full_date(item.date, 'YYYY-MM-DD') %></div>
+        <div class="archive-item-main">
+          <div class="archive-item-title-row">
+            <a href="<%- url_for(item.path) %>" class="interactive-link"><%- item.title || '未命名' %></a>
+          </div>
+        </div>
+      </article>
+    <% }); %>
+  </div>
 
-<% }); %>
-<%- partial('partial/pagination') %>
+  <%- partial('partial/pagination') %>
+</div>

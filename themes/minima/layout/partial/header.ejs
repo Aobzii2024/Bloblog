@@ -1,1 +1,24 @@
+<% if (!is_home()) { %>
+<header class="topbar">
+  <a href="<%= config.root %>" class="topbar-brand" aria-label="返回首页">
+    <img src="<%- url_for('/images/main.jpg') %>" alt="<%= theme.owner %>" class="topbar-logo" width="28" height="28" decoding="async">
+    <span class="topbar-title"><%= theme.title || theme.owner %></span>
+  </a>
 
+  <div class="topbar-nav-wrap">
+    <button id="topbarHamburgerBtn" class="hamburger-btn" type="button" aria-label="打开菜单" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="hero-menu" id="topbarMenu" hidden>
+      <a href="<%- config.root %>" class="hero-menu-link">首页</a>
+      <a href="<%- url_for('/archives/') %>" class="hero-menu-link">归档</a>
+      <a href="<%- url_for('/about/') %>" class="hero-menu-link">关于</a>
+      <button class="hero-menu-link theme-toggle-btn" type="button" aria-label="切换主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span>切换主题</span>
+      </button>
+    </div>
+  </div>
+</header>
+<% } %>

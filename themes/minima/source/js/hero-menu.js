@@ -1,9 +1,9 @@
 (() => {
   'use strict';
 
-  const initHeroMenu = () => {
-    const btn = document.getElementById('hamburgerBtn');
-    const menu = document.getElementById('heroMenu');
+  const setupDropdown = (btnId, menuId) => {
+    const btn = document.getElementById(btnId);
+    const menu = document.getElementById(menuId);
     if (!btn || !menu) return;
 
     let isOpen = false;
@@ -25,34 +25,39 @@
       else openMenu();
     };
 
-    // 按钮点击：切换菜单
+    // Toggle on button click
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       toggleMenu();
     });
 
-    // 点击菜单内部：不关闭（让链接正常跳转）
+    // Handle clicks inside menu
     menu.addEventListener('click', (e) => {
       e.stopPropagation();
-      // 点击后自动关闭
       if (e.target.closest('a')) {
         setTimeout(closeMenu, 100);
       }
     });
 
-    // 点击外部：关闭菜单
+    // Click outside to close
     document.addEventListener('click', () => {
       if (isOpen) closeMenu();
     });
 
-    // ESC 关闭
+    // ESC to close
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen) closeMenu();
     });
+  };
 
-    // 主题切换
-    const themeBtn = document.getElementById('themeToggle');
-    if (themeBtn && !themeBtn.dataset.bound) {
+  const initHeroMenu = () => {
+    setupDropdown('hamburgerBtn', 'heroMenu');
+    setupDropdown('topbarHamburgerBtn', 'topbarMenu');
+
+    // Theme toggle buttons across all menus
+    const themeButtons = document.querySelectorAll('.theme-toggle-btn');
+    themeButtons.forEach((themeBtn) => {
+      if (themeBtn.dataset.bound) return;
       themeBtn.dataset.bound = '1';
       themeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -65,7 +70,7 @@
           else localStorage.setItem('preferredTheme', isDark ? 'dark' : 'light');
         } catch (err) {}
       });
-    }
+    });
   };
 
   document.addEventListener('DOMContentLoaded', initHeroMenu);
