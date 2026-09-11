@@ -7,7 +7,7 @@ Aobzii 的个人 Hexo 博客源码仓库。记录技术笔记、生活碎片、�
 - 🌐 **在线站点**：[ramblings.aobzii.top](https://ramblings.aobzii.top)
 - 🛠️ **静态生成器**：[Hexo 7](https://hexo.io/)
 - 🎨 **博客主题**：定制化 [Minima](themes/minima) 主题
-- ⚡ **部署方案**：Vercel CI/CD 自动化构建
+- ⚡ **部署方案**：静态站点，可部署至任意静态托管服务（GitHub Pages / Netlify / Cloudflare Pages / Vercel 等）
 
 ---
 
@@ -20,12 +20,11 @@ Aobzii 的个人 Hexo 博客源码仓库。记录技术笔记、生活碎片、�
 ├── _config.yml              # Hexo 站点全局配置文件
 ├── package.json             # 项目依赖与 npm scripts
 ├── package-lock.json        # 依赖版本锁定
-├── vercel.json              # Vercel 构建配置与静态资源长缓存规则
 ├── README.md                # 项目详细说明文档
+├── _headers                 # HTTP 安全头（CSP、X-Frame-Options 等，适配 Netlify/Vercel/Cloudflare）
 ├── .gitignore               # Git 忽略配置（忽略 node_modules、public、db.json 等）
 ├── source/                  # 站点内容源码
 │   ├── _posts/              # 博客长篇文章 Markdown
-│   ├── daily/               # 卡片式日常记录与碎碎念
 │   ├── archives/            # 归档与分类页面
 │   ├── about/               # 个人关于页面
 │   └── 404.md               # 404 错误页面
@@ -96,14 +95,11 @@ tag:
 文章正文内容...
 ```
 
-### 日常记录 (Daily Cards)
-
-轻量级碎片记录位于 `source/daily/` 目录下。日常索引页面会自动聚合该目录下除 `index.md` 之外的日记文件，以时间流卡片的形式呈现。
 
 ### 图片管理
 
 - 本地图片资源集中存放于根目录下的 `images/` 目录中。
-- Markdown 文章中可通过相对路径或 jsDelivr CDN 路径进行引用与加速。
+- Markdown 文章中通过相对路径引用本地图片，确保链接长期有效。
 
 ---
 
@@ -127,19 +123,27 @@ tag:
 
 ---
 
-## ☁️ 部署说明 (Vercel)
+## ☁️ 部署说明
 
-本项目根目录已内置 `vercel.json`，配置了极速构建与静态资源最优缓存策略：
+本项目输出标准静态文件（`public/` 目录），可部署至任意静态托管服务：
 
-```json
-{
-  "installCommand": "npm ci",
-  "buildCommand": "npm run build",
-  "outputDirectory": "public"
-}
+### GitHub Pages
+```bash
+# 在 _config.yml 中配置 deploy
+deploy:
+  type: git
+  repo: https://github.com/Aobzii2024/Aobzii2024.github.io.git
+  branch: main
 ```
 
-将代码推送到 GitHub 仓库后，在 [Vercel](https://vercel.com/) 导入该仓库即可实现 **Push 即全自动构建与全球 CDN 发布**，无需额外配置根目录或环境变量。
+### Netlify / Cloudflare Pages
+将 `public/` 目录设为构建输出目录即可。
+
+### 通用
+```bash
+npm run build   # 生成 public/ 目录
+# 将 public/ 中的文件上传至任意静态服务器
+```
 
 ---
 

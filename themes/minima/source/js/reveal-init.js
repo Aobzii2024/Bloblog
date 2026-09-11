@@ -1,10 +1,10 @@
 (() => {
+  'use strict';
   const config = window.__minimaTheme || {};
   const events = config.events || {};
 
   const revealSelector = [
     '.home-post-row',
-    '.daily-card',
     '.archive-item',
     '.post-end-meta',
     '.post-content > *',
@@ -67,6 +67,9 @@
   };
 
   const initRevealAnimations = () => {
+    // Guard: DOMContentLoaded + op:page-ready both fire on first paint.
+    if (window.__minimaRevealInit) return;
+    window.__minimaRevealInit = true;
     document.documentElement.classList.add('motion-enabled');
     markRevealItems();
   };

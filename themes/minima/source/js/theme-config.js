@@ -1,4 +1,5 @@
 (() => {
+  'use strict';
   const selectors = {
     pageContent: '#page-content',
     archiveSearchInput: '#archive-search-input',

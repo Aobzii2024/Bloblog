@@ -14,11 +14,11 @@ timezone: Asia/Shanghai
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://ramblings.aobzii.top
-permalink: :year/:month/:day/:slug/
+permalink: :year/:month/:slug/
 permalink_defaults:
 pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+  trailing_index: false # Remove trailing 'index.html' from permalinks
+  trailing_html: false # Remove trailing '.html' from permalinks
 
 # Directory
 source_dir: source
@@ -29,6 +29,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - images/*
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -58,6 +59,7 @@ prismjs:
 marked:
   gfm: true
   breaks: false
+  headerIds: true
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -114,3 +116,10 @@ feed:
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+# Minification
+## Docs: https://github.com/MoOx/hexo-all-minifier
+minify:
+  css: true
+  js: true
+  html: true

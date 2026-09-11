@@ -1,4 +1,5 @@
 (() => {
+  'use strict';
   const config = window.__minimaTheme || {};
   const selectors = config.selectors || {};
   const events = config.events || {};

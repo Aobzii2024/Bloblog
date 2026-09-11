@@ -41,5 +41,30 @@
         </div>
       <% } %>
     </footer>
+
+    <nav class="post-nav" aria-label="文章导航">
+      <% if (page.prev) { %>
+        <a href="<%- url_for(page.prev.path) %>" class="post-nav-link post-nav-prev">
+          <span class="post-nav-label">← 上一篇</span>
+          <span class="post-nav-title"><%- page.prev.title || '未命名' %></span>
+        </a>
+      <% } else { %>
+        <span class="post-nav-link post-nav-prev is-disabled">
+          <span class="post-nav-label">← 上一篇</span>
+          <span class="post-nav-title">已经是最早的一篇</span>
+        </span>
+      <% } %>
+      <% if (page.next) { %>
+        <a href="<%- url_for(page.next.path) %>" class="post-nav-link post-nav-next">
+          <span class="post-nav-label">下一篇 →</span>
+          <span class="post-nav-title"><%- page.next.title || '未命名' %></span>
+        </a>
+      <% } else { %>
+        <span class="post-nav-link post-nav-next is-disabled">
+          <span class="post-nav-label">下一篇 →</span>
+          <span class="post-nav-title">已经是最新的一篇</span>
+        </span>
+      <% } %>
+    </nav>
   </div>
 </article>

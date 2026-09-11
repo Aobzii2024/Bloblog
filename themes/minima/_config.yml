@@ -1,11 +1,10 @@
 title: "Aobzii"
 
 owner: "Aobzii"
-info: "一个记录笔记、日常碎片与漫谈的博客。"
+info: "一个记录笔记、笔记与漫谈的博客。"
 desc: "丢失的茶叶蛋，在文字里找回。"
 
 menu:
-  日常: /daily/
   归档: /archives/
   关于: /about/
 

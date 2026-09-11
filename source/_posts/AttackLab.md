@@ -942,4 +942,4 @@ NICE JOB!
 B24040307@ICS:~/target48$
 ```
 
-![](https://cdn.jsdelivr.net/gh/Aobzii2024/Aobzii-Blog@main/images/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-05-11%20194740.png)
+![](/images/屏幕截图 2026-05-11 194740.png)

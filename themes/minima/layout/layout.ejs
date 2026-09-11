@@ -9,6 +9,22 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
+  <!-- Inline boot: paint the themed background the instant the new document
+       exists, before external CSS streams in. Prevents the white flash that
+       used to happen between navigation and first style application. -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      var dark = false;
+      try { dark = localStorage.getItem('preferredTheme') === 'dark'; }
+      catch (e) { dark = false; }
+      if (!dark && window.matchMedia('(prefers-color-scheme: dark)').matches) dark = true;
+      if (dark) d.classList.add('darkmode');
+      d.style.background = dark ? 'rgb(34,34,38)' : '#fff';
+      d.style.color = dark ? 'rgb(230,230,230)' : '#222';
+      d.style.colorScheme = dark ? 'dark' : 'light';
+    })();
+  </script>
 
   <%
   if (!config.author) {
@@ -90,20 +106,9 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <script>
-    (function () {
-      try {
-        if (localStorage.getItem('preferredTheme') === 'dark') {
-          document.documentElement.classList.add('darkmode');
-          document.documentElement.style.colorScheme = 'dark';
-        } else {
-          document.documentElement.style.colorScheme = 'light';
-        }
-      } catch (e) {
-        document.documentElement.style.colorScheme = 'light';
-      }
-    })();
-  </script>
+  <!-- Content Security Policy (fallback for servers without _headers support) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' 'unsafe-hashes' https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' https://cdn.jsdelivr.net; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests;">
+
   <style>
     html {
       background: #fff;
@@ -171,7 +176,6 @@
     .home-hero,
     .post-shell,
     .archive-shell,
-    .daily-page,
     .page-content,
     .markdown-content {
       visibility: visible;
@@ -185,10 +189,6 @@
     }
 
   </style>
-
-  <!-- Preload fonts
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="preload" href="/fonts/LXGWWenKaiLite-Medium.ttf" as="font" type="font/ttf" crossorigin media="(min-width: 769px)">
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -225,25 +225,31 @@
     };
   </script>
   <script src="/js/theme-config.js" defer></script>
-  <% if (theme.picjs) { %>
-  <script src="<%- theme.picjs %>" defer></script>
-  <% } %>
+  <script src="/js/lightbox.js" defer></script>
   <script src="/js/navigation-init.js" defer></script>
   <script src="/js/media-init.js" defer></script>
   <script src="/js/math-init.js" defer></script>
   <script src="/js/mermaid-init.js" defer></script>
   <script src="/js/theme-toggle.js" defer></script>
+  <script src="/js/shortcuts.js" defer></script>
+  <script src="/js/back-to-top.js" defer></script>
+  <script src="/js/easter-eggs.js" defer></script>
+  <script src="/js/typewriter.js" defer></script>
+  <script src="/js/image-fallback.js" defer></script>
+  <script src="/js/hero-menu.js" defer></script>
+  <script src="/js/tea-egg-easter-egg.js" defer></script>
   <% if (is_archive()) { %>
   <script src="/js/archive-search.js" defer></script>
   <% } %>
   <% if (is_post()) { %>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <%- css('css/prism-dark.css') %>
   <%- css('css/prism-line-numbers.css') %>
   <script src="/js/code-tools.js" defer></script>
   <script src="/js/reveal-init.js" defer></script>
   <script src="/js/reading-progress.js" defer></script>
+  <script src="/js/toc.js" defer></script>
   <% } %>
 
 </head>
@@ -266,6 +272,7 @@
 
   </div>
   <script src="/js/site-init.js" defer></script>
+  <script src="/js/sw-register.js" defer></script>
 
 </body>
 
